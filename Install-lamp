@@ -1,0 +1,21 @@
+#Ansible playbook for installing LAMP(Linux Apache MySQL PHP) stack on Ubuntu
+
+---
+- hosts: My_Group
+  tasks:
+    - name: Task # 1 - Update APT package manager repositories cache
+      become: true
+      apt:
+        update_cache: yes
+    - name: Task # 2 - Install LAMP stack using Ansible
+      become: yes
+      apt:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+           - apache2
+           - mysql-server
+           - php
+
+# ansible-playbook installLAMP.yml
